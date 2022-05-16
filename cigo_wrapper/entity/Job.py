@@ -88,61 +88,15 @@ class Job:
                   phone_number=response_dic['phone_number'],
                   address=response_dic['address'])
 
-        for key in response_dic.keys():
-            if key == 'job_id' and response_dic[key] is not None:
-                job.job_id = response_dic[key]
-            elif key == 'job_type' and response_dic[key] is not None:
-                job.type = response_dic[key]
-            elif key == 'status' and response_dic[key] is not None:
-                job.status = response_dic[key]
-            elif key == 'quick_desc' and response_dic[key] is not None:
-                job.quick_desc = response_dic[key]
-            elif key == 'confirmation_status' and response_dic[key] is not None:
-                job.confirmation_status = response_dic[key]
-            elif key == 'mobile_number' and response_dic[key] is not None:
-                job.mobile_number = response_dic[key]
-            elif key == 'email' and response_dic[key] is not None:
-                job.email = response_dic[key]
-            elif key == 'apartment' and response_dic[key] is not None:
-                job.apartment = response_dic[key]
-            elif key == 'postal_code' and response_dic[key] is not None:
-                job.postal_code = response_dic[key]
-            elif key == 'time_preference' and response_dic[key] != 'None' and response_dic[key] is not None:
-                job.time_preference = response_dic[key]
-            elif key == 'balance_owed' and response_dic[key] is not None:
-                job.balance_owed = response_dic[key]
-            elif key == 'comment' and response_dic[key] is not None:
-                job.comment = response_dic[key]
-            elif key == 'branch_id' and response_dic[key] is not None:
-                job.branch_id = response_dic[key]
-            elif key == 'distribution_center_id' and response_dic[key] is not None:
-                job.distribution_center_id = response_dic[key]
-            elif key == 'time_frame' and response_dic[key] is not None:
-                if response_dic[key]['start'] is not None and response_dic[key]['end'] is not None:
-                    job.time_frame = response_dic[key]
-            elif key == 'invoices' and response_dic[key] is not None:
-                job.invoices = response_dic[key]
-            elif key == 'reference_id' and response_dic[key] is not None:
-                job.reference_id = response_dic[key]
-            elif key == 'customer_reference_id' and response_dic[key] is not None:
-                job.customer_reference_id = response_dic[key]
-            elif key == 'post_staging' and response_dic[key] is not None:
-                for i_key in response_dic[key]:
-                    if i_key == 'tracking' and response_dic[key][i_key] is not None:
-                        job.tracking = response_dic[key][i_key]
-                    elif i_key == 'progress' and response_dic[key][i_key] is not None:
-                        job.progress = JobProgress.from_json(response_dic[key][i_key])
-                    elif i_key == 'scheduling' and response_dic[key][i_key] is not None:
-                        job.scheduling = response_dic[key][i_key]
-                    elif i_key == 'coordinates' and response_dic[key][i_key] is not None:
-                        job.coordinates = response_dic[key][i_key]
-                    elif i_key == 'geocoding' and response_dic[key][i_key] is not None:
-                        job.geocoding = JobGeocoding.from_json(response_dic[key][i_key])
-                    elif i_key == 'digital_signature' and response_dic[key][i_key] is not None:
-                        job.digital_signature = response_dic[key][i_key]
-                    elif i_key == 'payment_collection' and response_dic[key][i_key] is not None:
-                        job.payment_collection = response_dic[key][i_key]
-                    elif i_key == 'review' and response_dic[key][i_key] is not None:
-                        job.review = response_dic[key][i_key]
+        for key, value in response_dic.items():
+            if key == 'post_staging':
+                for post_key, post_value in value.items():
+                    if post_key == 'progress':
+                        post_value = JobProgress.from_json(post_value)
+                    elif post_key == 'geocoding':
+                        post_value = JobGeocoding.from_json(post_value)
+                    setattr(job, post_key, post_value)
+            else:
+                setattr(job, key, value)
 
         return job
