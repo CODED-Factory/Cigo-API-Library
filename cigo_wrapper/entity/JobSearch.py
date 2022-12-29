@@ -19,7 +19,7 @@ class JobSearch:
     branch_id = None
     distribution_center_id = None
 
-    def __init__(self, start_date='tbd'):
+    def __init__(self, start_date="tbd"):
         self.start_date = start_date
 
     def to_json(self):

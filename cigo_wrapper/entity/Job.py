@@ -43,8 +43,9 @@ class Job:
     payment_collection = None
     review = None
 
-    def __init__(self, date=None, customer_first_name="", customer_last_name="", phone_number="", address="",
-                 skip_staging=True):
+    def __init__(
+        self, date=None, customer_first_name="", customer_last_name="", phone_number="", address="", skip_staging=True
+    ):
         # Job created will skip the staging area (Import Tool) if True
         self.skip_staging = skip_staging
 
@@ -66,83 +67,86 @@ class Job:
         response_dic = job_response
         job = cls()
         for key in response_dic.keys():
-            if key == 'job_id' and response_dic[key] is not None:
+            if key == "job_id" and response_dic[key] is not None:
                 job.job_id = response_dic[key]
-            elif key == 'status' and response_dic[key] is not None:
+            elif key == "status" and response_dic[key] is not None:
                 job.status = response_dic[key]
-            elif key == 'progress' and response_dic[key] is not None:
+            elif key == "progress" and response_dic[key] is not None:
                 job.progress = JobProgress.from_json(response_dic[key])
-            elif key == 'coordinates' and response_dic[key] is not None:
+            elif key == "coordinates" and response_dic[key] is not None:
                 job.coordinates = response_dic[key]  # is the location of the Job (the target location)
-            elif key == 'geocoding' and response_dic[key] is not None:
+            elif key == "geocoding" and response_dic[key] is not None:
                 job.geocoding = JobGeocoding.from_json(response_dic[key])
-            elif key == 'vehicle_tracking' and response_dic[key] is not None:
+            elif key == "vehicle_tracking" and response_dic[key] is not None:
                 job.vehicle_tracking = VehicleTracking.from_json(response_dic[key])
         return job
 
     @classmethod
     def from_json(cls, job_response):
         response_dic = job_response
-        job = cls(date=response_dic['date'], customer_first_name=response_dic['first_name'],
-                  customer_last_name=response_dic['last_name'],
-                  phone_number=response_dic['phone_number'],
-                  address=response_dic['address'])
+        job = cls(
+            date=response_dic["date"],
+            customer_first_name=response_dic["first_name"],
+            customer_last_name=response_dic["last_name"],
+            phone_number=response_dic["phone_number"],
+            address=response_dic["address"],
+        )
 
         for key in response_dic.keys():
-            if key == 'job_id' and response_dic[key] is not None:
+            if key == "job_id" and response_dic[key] is not None:
                 job.job_id = response_dic[key]
-            elif key == 'job_type' and response_dic[key] is not None:
+            elif key == "job_type" and response_dic[key] is not None:
                 job.type = response_dic[key]
-            elif key == 'status' and response_dic[key] is not None:
+            elif key == "status" and response_dic[key] is not None:
                 job.status = response_dic[key]
-            elif key == 'quick_desc' and response_dic[key] is not None:
+            elif key == "quick_desc" and response_dic[key] is not None:
                 job.quick_desc = response_dic[key]
-            elif key == 'confirmation_status' and response_dic[key] is not None:
+            elif key == "confirmation_status" and response_dic[key] is not None:
                 job.confirmation_status = response_dic[key]
-            elif key == 'mobile_number' and response_dic[key] is not None:
+            elif key == "mobile_number" and response_dic[key] is not None:
                 job.mobile_number = response_dic[key]
-            elif key == 'email' and response_dic[key] is not None:
+            elif key == "email" and response_dic[key] is not None:
                 job.email = response_dic[key]
-            elif key == 'apartment' and response_dic[key] is not None:
+            elif key == "apartment" and response_dic[key] is not None:
                 job.apartment = response_dic[key]
-            elif key == 'postal_code' and response_dic[key] is not None:
+            elif key == "postal_code" and response_dic[key] is not None:
                 job.postal_code = response_dic[key]
-            elif key == 'time_preference' and response_dic[key] != 'None' and response_dic[key] is not None:
+            elif key == "time_preference" and response_dic[key] != "None" and response_dic[key] is not None:
                 job.time_preference = response_dic[key]
-            elif key == 'balance_owed' and response_dic[key] is not None:
+            elif key == "balance_owed" and response_dic[key] is not None:
                 job.balance_owed = response_dic[key]
-            elif key == 'comment' and response_dic[key] is not None:
+            elif key == "comment" and response_dic[key] is not None:
                 job.comment = response_dic[key]
-            elif key == 'branch_id' and response_dic[key] is not None:
+            elif key == "branch_id" and response_dic[key] is not None:
                 job.branch_id = response_dic[key]
-            elif key == 'distribution_center_id' and response_dic[key] is not None:
+            elif key == "distribution_center_id" and response_dic[key] is not None:
                 job.distribution_center_id = response_dic[key]
-            elif key == 'time_frame' and response_dic[key] is not None:
-                if response_dic[key]['start'] is not None and response_dic[key]['end'] is not None:
+            elif key == "time_frame" and response_dic[key] is not None:
+                if response_dic[key]["start"] is not None and response_dic[key]["end"] is not None:
                     job.time_frame = response_dic[key]
-            elif key == 'invoices' and response_dic[key] is not None:
+            elif key == "invoices" and response_dic[key] is not None:
                 job.invoices = response_dic[key]
-            elif key == 'reference_id' and response_dic[key] is not None:
+            elif key == "reference_id" and response_dic[key] is not None:
                 job.reference_id = response_dic[key]
-            elif key == 'customer_reference_id' and response_dic[key] is not None:
+            elif key == "customer_reference_id" and response_dic[key] is not None:
                 job.customer_reference_id = response_dic[key]
-            elif key == 'post_staging' and response_dic[key] is not None:
+            elif key == "post_staging" and response_dic[key] is not None:
                 for i_key in response_dic[key]:
-                    if i_key == 'tracking' and response_dic[key][i_key] is not None:
+                    if i_key == "tracking" and response_dic[key][i_key] is not None:
                         job.tracking = response_dic[key][i_key]
-                    elif i_key == 'progress' and response_dic[key][i_key] is not None:
+                    elif i_key == "progress" and response_dic[key][i_key] is not None:
                         job.progress = JobProgress.from_json(response_dic[key][i_key])
-                    elif i_key == 'scheduling' and response_dic[key][i_key] is not None:
+                    elif i_key == "scheduling" and response_dic[key][i_key] is not None:
                         job.scheduling = response_dic[key][i_key]
-                    elif i_key == 'coordinates' and response_dic[key][i_key] is not None:
+                    elif i_key == "coordinates" and response_dic[key][i_key] is not None:
                         job.coordinates = response_dic[key][i_key]
-                    elif i_key == 'geocoding' and response_dic[key][i_key] is not None:
+                    elif i_key == "geocoding" and response_dic[key][i_key] is not None:
                         job.geocoding = JobGeocoding.from_json(response_dic[key][i_key])
-                    elif i_key == 'digital_signature' and response_dic[key][i_key] is not None:
+                    elif i_key == "digital_signature" and response_dic[key][i_key] is not None:
                         job.digital_signature = response_dic[key][i_key]
-                    elif i_key == 'payment_collection' and response_dic[key][i_key] is not None:
+                    elif i_key == "payment_collection" and response_dic[key][i_key] is not None:
                         job.payment_collection = response_dic[key][i_key]
-                    elif i_key == 'review' and response_dic[key][i_key] is not None:
+                    elif i_key == "review" and response_dic[key][i_key] is not None:
                         job.review = response_dic[key][i_key]
 
         return job

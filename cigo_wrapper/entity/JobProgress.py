@@ -16,15 +16,15 @@ class JobProgress:
         progress = cls()
         response = job_response
         for key in response.keys():
-            if key == 'duration' and response[key] is not None:
+            if key == "duration" and response[key] is not None:
                 progress.duration = response[key]
-            elif key == 'start_datetime' and response[key] is not None:
+            elif key == "start_datetime" and response[key] is not None:
                 progress.start_datetime = response[key]
-            elif key == 'end_datetime' and response[key] is not None:
+            elif key == "end_datetime" and response[key] is not None:
                 progress.end_datetime = response[key]
-            elif key == 'started' and response[key] is not None:
+            elif key == "started" and response[key] is not None:
                 progress.started = response[key]
-            elif key == 'finished' and response[key] is not None:
+            elif key == "finished" and response[key] is not None:
                 progress.finished = response[key]
 
         return progress
