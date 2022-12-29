@@ -18,29 +18,29 @@ class Itinerary:
         response_dic = itinerary_response
 
         for key in response_dic.keys():
-            if key == 'itinerary_id':
+            if key == "itinerary_id":
                 itinerary.itinerary_id = response_dic[key]
-            elif key == 'date':
+            elif key == "date":
                 itinerary.date = response_dic[key]
-            elif key == 'planned_departure_datetime':
+            elif key == "planned_departure_datetime":
                 itinerary.planned_departure_datetime = response_dic[key]
-            elif key == 'start_location':
+            elif key == "start_location":
                 itinerary.start_location = response_dic[key]
-            elif key == 'end_location':
+            elif key == "end_location":
                 itinerary.end_location = response_dic[key]
-            elif key == 'round_trip':
+            elif key == "round_trip":
                 itinerary.round_trip = response_dic[key]
-            elif key == 'route_metrics':
+            elif key == "route_metrics":
                 itinerary.route_metrics = response_dic[key]
-            elif key == 'route_options':
+            elif key == "route_options":
                 itinerary.route_options = response_dic[key]
-            elif key == 'vehicle':
+            elif key == "vehicle":
                 itinerary.vehicle = response_dic[key]
-            elif key == 'operators':
+            elif key == "operators":
                 itinerary.operators = response_dic[key]
-            elif key == 'stops_count':
+            elif key == "stops_count":
                 itinerary.stops_count = response_dic[key]
-            elif key == 'stops':
+            elif key == "stops":
                 itinerary.stops = response_dic[key]
 
         return itinerary

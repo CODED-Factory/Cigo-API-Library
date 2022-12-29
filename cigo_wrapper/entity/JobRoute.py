@@ -14,11 +14,11 @@ class JobRoute:
         route = cls()
         response = job_response
         for key in response.keys():
-            if key == 'arrival_time' and response[key] is not None:
+            if key == "arrival_time" and response[key] is not None:
                 route.arrival_time = response[key]
-            elif key == 'distance' and response[key] is not None:
+            elif key == "distance" and response[key] is not None:
                 route.distance = response[key]
-            elif key == 'road_time' and response[key] is not None:
+            elif key == "road_time" and response[key] is not None:
                 route.road_time = response[key]
 
         return route

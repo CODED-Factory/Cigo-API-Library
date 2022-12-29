@@ -14,11 +14,11 @@ class JobGeocoding:
         geocoding = cls()
         response = job_response
         for key in response.keys():
-            if key == 'validity' and response[key] is not None:
+            if key == "validity" and response[key] is not None:
                 geocoding.validity = response[key]
-            elif key == 'subdivision_code' and response[key] is not None:
+            elif key == "subdivision_code" and response[key] is not None:
                 geocoding.subdivision_code = response[key]
-            elif key == 'country_code' and response[key] is not None:
+            elif key == "country_code" and response[key] is not None:
                 geocoding.country_code = response[key]
 
         return geocoding
